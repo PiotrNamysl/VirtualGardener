@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualGardenerServer", "VirtualGardenerServer.csproj", "{56150A59-2EEC-4508-BC34-4A92CF816806}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualGardener.Server", "VirtualGardener.Server\VirtualGardener.Server.csproj", "{A4721593-B7A9-4B78-A525-21E8FB658A1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualGardener.Client", "VirtualGardener.Client\VirtualGardener.Client\VirtualGardener.Client.csproj", "{EE05F3B1-F754-4686-A32C-C7CA15DB38A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{56150A59-2EEC-4508-BC34-4A92CF816806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56150A59-2EEC-4508-BC34-4A92CF816806}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56150A59-2EEC-4508-BC34-4A92CF816806}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56150A59-2EEC-4508-BC34-4A92CF816806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4721593-B7A9-4B78-A525-21E8FB658A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4721593-B7A9-4B78-A525-21E8FB658A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4721593-B7A9-4B78-A525-21E8FB658A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4721593-B7A9-4B78-A525-21E8FB658A1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE05F3B1-F754-4686-A32C-C7CA15DB38A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE05F3B1-F754-4686-A32C-C7CA15DB38A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE05F3B1-F754-4686-A32C-C7CA15DB38A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE05F3B1-F754-4686-A32C-C7CA15DB38A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
