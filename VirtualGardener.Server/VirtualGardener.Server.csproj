@@ -19,8 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Infrastructure\Database\Models\" />
-      <Folder Include="Infrastructure\Models\" />
       <Folder Include="Infrastructure\Services\Abstraction\" />
     </ItemGroup>
 
