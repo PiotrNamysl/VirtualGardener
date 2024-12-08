@@ -1,15 +1,22 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using VirtualGardenerServer.Database;
+using VirtualGardenerServer.Models.ServerSettings;
+using VirtualGardenerServer.Services;
+using VirtualGardenerServer.Services.Abstraction;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+var serverSettings = builder.Configuration.GetSection("ServerSettings").Get<ServerSettings>();
+
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseNpgsql(serverSettings?.ConnectionString));
 
+builder.Services.AddScoped<IAuthService, AuthService>();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

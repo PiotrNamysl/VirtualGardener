@@ -1,4 +1,4 @@
-namespace VirtualGardenerServer.Infrastructure.Models;
+namespace VirtualGardenerServer.Models;
 
 public class Plant
 {

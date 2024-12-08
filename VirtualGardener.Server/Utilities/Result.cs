@@ -1,4 +1,4 @@
-namespace VirtualGardenerServer.Infrastructure.Utilities;
+namespace VirtualGardenerServer.Utilities;
 
 public enum ResultStatus
 {
@@ -13,7 +13,8 @@ public enum ResultStatusCode
     NoDataFound,
     DataAlreadyExist,
     AccessForbidden,
-    BadRequest
+    BadRequest,
+    DatabaseError
 }
 
 public interface IResult
@@ -22,6 +23,7 @@ public interface IResult
     public ResultStatusCode StatusCode { get; init; }
     public string Message { get; init; }
 
+    public bool IsFullSuccess => Status == ResultStatus.Success && StatusCode == ResultStatusCode.Ok;
     public bool IsSuccess => Status == ResultStatus.Success;
     public bool IsNotSuccess => Status != ResultStatus.Success;
     public bool IsWarning() => Status == ResultStatus.Warning;
