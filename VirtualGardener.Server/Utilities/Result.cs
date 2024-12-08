@@ -14,7 +14,10 @@ public enum ResultStatusCode
     DataAlreadyExist,
     AccessForbidden,
     BadRequest,
-    DatabaseError
+    DatabaseError,
+    UserCreationFailed,
+    Unknown,
+    InternalServerError,
 }
 
 public interface IResult

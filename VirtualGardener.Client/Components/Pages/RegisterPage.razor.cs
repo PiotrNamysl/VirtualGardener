@@ -1,31 +1,41 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
+using Radzen;
 using VirtualGardener.Client.Models;
 using VirtualGardener.Client.Services;
+using VirtualGardener.Client.Utilities;
+using VirtualGardenerServer.Models.ServerSettings;
 
 namespace VirtualGardener.Client.Components.Pages;
 
-public partial class RegisterPage
+public partial class RegisterPage()
 {
-    [Inject] private IVirtualGardenerApiService _virtualGardenerApiService { get; set; }
+    [Inject] private IVirtualGardenerApiService _virtualGardenerApiService { get; init; }
+    [Inject] private NavigationManager _navigationManager { get; init; }
+    [Inject] private DialogService _dialogService { get; init; }
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
+
+    private User _newUser = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-
-        await InvokeAsync(StateHasChanged);
     }
 
     private async Task Register()
     {
-        await _virtualGardenerApiService.RegisterAsync(new User
+        var result = await _virtualGardenerApiService.RegisterAsync(_newUser);
+        if (result.IsFullSuccess)
         {
-            Email = "asas",
-            Name = "asas",
-            Password = "123"
-        });
+            var answer = await _dialogService.Alert("You will be redirected to log in page.", "Registration Successful");
+            _navigationManager.NavigateTo("/");
+        }
+
+        else
+        {
+            if (result.StatusCode == ResultStatusCode.DataAlreadyExist)
+                await _dialogService.Alert("User already exists.", "Registration Failed");
+            else
+                await _dialogService.Alert("Please contact the administrator.", "Registration Failed");
+        }
     }
 }

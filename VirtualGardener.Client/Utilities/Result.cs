@@ -14,7 +14,10 @@ public enum ResultStatusCode
     DataAlreadyExist,
     AccessForbidden,
     BadRequest,
-    DatabaseError
+    DatabaseError,
+    UserCreationFailed,
+    Unknown,
+    InternalServerError,
 }
 
 public interface IResult
@@ -33,7 +36,7 @@ public interface IResult
 public interface IResult<T> : IResult where T : class
 {
     public T Data { get; init; }
-    public bool IsFullSuccess() => Status == ResultStatus.Success && StatusCode == ResultStatusCode.Ok && Data is not null;
+    public bool IsFullSuccess() => Status == ResultStatus.Success && StatusCode == ResultStatusCode.Ok;
 }
 
 public class Result(ResultStatus status, ResultStatusCode statusCode, string message) : IResult
@@ -81,4 +84,5 @@ public static class ResultStatusCodeExtension
 {
     public static bool IsOkStatusCode(this IResult result) => result.StatusCode == ResultStatusCode.Ok;
     public static bool IsNotOkStatusCode(this IResult result) => result.StatusCode != ResultStatusCode.Ok;
+    public static bool IsFullSuccess(this IResult result) => result.Status == ResultStatus.Success && result.StatusCode == ResultStatusCode.Ok;
 }
