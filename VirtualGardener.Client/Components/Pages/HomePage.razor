@@ -1,6 +1,8 @@
-@page "/HomePage"
-<h3>HomePage</h3>
+@page "/"
+@rendermode InteractiveServer
+@inherits BaseAuthorizedPage
 
-@code {
-    
+@if (IsAuthorized)
+{
+    <h3>HomePage</h3>
 }

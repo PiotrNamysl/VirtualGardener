@@ -5,13 +5,13 @@ namespace VirtualGardenerServer.Database;
 
 public partial class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Plant> Plants { get; set; }
+    public DbSet<UserEntity> Users { get; set; }
+    public DbSet<PlantEntity> Plants { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<User>()
+        modelBuilder.Entity<UserEntity>()
             .HasIndex(u => u.Email).IsUnique();
     }
 }

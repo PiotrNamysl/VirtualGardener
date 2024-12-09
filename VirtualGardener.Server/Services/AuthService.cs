@@ -11,20 +11,20 @@ namespace VirtualGardenerServer.Services;
 
 public class AuthService(DataContext dataContext) : IAuthService
 {
-    public async Task<IResult> RegisterAsync(UserDto userDto)
+    public async Task<IResult> RegisterAsync(User user)
     {
         try
         {
-            var tryToGetUser = await dataContext.Users.FirstOrDefaultAsync(u => u.Email == userDto.Email);
+            var tryToGetUser = await dataContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
 
             if (tryToGetUser is not null)
                 return Result.Success(ResultStatusCode.DataAlreadyExist);
 
-            var user = await dataContext.Users.AddAsync(new User
+            var userEntity = await dataContext.Users.AddAsync(new UserEntity
             {
-                Email = userDto.Email,
-                Name = userDto.Name,
-                Password = GetHashedPassword(userDto.Password),
+                Email = user.Email,
+                Name = user.Name,
+                Password = GetHashedPassword(user.Password),
                 Role = Role.User
             });
 
@@ -38,16 +38,21 @@ public class AuthService(DataContext dataContext) : IAuthService
         }
     }
 
-    public async Task<IResult> SignInAsync(string email, string password)
+    public async Task<IResult<UserDto>> SignInAsync(string email, string password)
     {
         var user = await dataContext.Users.FirstOrDefaultAsync(u => u.Email == email);
 
         if (user is not null)
             return user.Password == GetHashedPassword(password)
-                ? Result.Success()
-                : Result.Warning(ResultStatusCode.AccessForbidden);
+                ? Result<UserDto>.Success(new UserDto
+                {
+                    Email = user.Email,
+                    Name = user.Name,
+                    Role = user.Role
+                })
+                : Result<UserDto>.Warning(ResultStatusCode.AccessForbidden);
 
-        return Result.Success(ResultStatusCode.NoDataFound);
+        return Result<UserDto>.Success(ResultStatusCode.NoDataFound);
     }
 
     private static string GetHashedPassword(string password)

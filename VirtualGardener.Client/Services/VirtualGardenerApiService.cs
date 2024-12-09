@@ -44,13 +44,13 @@ public class VirtualGardenerApiService(IOptions<ServerSettings> serverSettings) 
         return Result.Success();
     }
 
-    public async Task<IResult> LogInAsync(string email, string password)
+    public async Task<IResult<User>> LogInAsync(string email, string password)
     {
         using var client = new HttpClient();
 
         try
         {
-            var url = $"{_baseUrl}auth/register";
+            var url = $"{_baseUrl}auth/logIn";
             
             var content = new StringContent(JsonConvert.SerializeObject(
                 new LoginRequest
@@ -62,21 +62,19 @@ public class VirtualGardenerApiService(IOptions<ServerSettings> serverSettings) 
 
             var response = await client.PostAsync(url, content);
             var responseBody = await response.Content.ReadAsStringAsync();
-            var parsedResponse = JsonConvert.DeserializeObject<Result>(responseBody);
+            var parsedResponse = JsonConvert.DeserializeObject<Result<User>>(responseBody);
 
             if (parsedResponse.IsFullSuccess())
                 return parsedResponse;
 
             else if (parsedResponse.StatusCode == ResultStatusCode.DataAlreadyExist)
-                return Result.Warning(ResultStatusCode.DataAlreadyExist);
+                return Result<User>.Warning(ResultStatusCode.DataAlreadyExist);
 
-            return Result.Warning(ResultStatusCode.UserCreationFailed);
+            return Result<User>.Warning(ResultStatusCode.UserCreationFailed);
         }
         catch (Exception ex)
         {
-            return Result.Error(ResultStatusCode.Unknown);
+            return Result<User>.Error(ResultStatusCode.Unknown);
         }
-
-        return Result.Success();
     }
 }

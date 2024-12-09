@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using VirtualGardener.Client.Models.Requests;
 using VirtualGardenerServer.Models;
 using VirtualGardenerServer.Services.Abstraction;
 using VirtualGardenerServer.Utilities;
@@ -9,17 +10,17 @@ namespace VirtualGardenerServer.Controllers;
 public class AuthController(IAuthService authService) : BaseController
 {
     [HttpPost("register")]
-    public async Task<IResult> RegisterAsync(UserDto userDto)
+    public async Task<IResult> RegisterAsync(User user)
     {
-        var result = await authService.RegisterAsync(userDto);
+        var result = await authService.RegisterAsync(user);
 
         return result;
     }
 
-    [HttpPost("signIn")]
-    public async Task<IResult> SignInAsync(string email, string password)
+    [HttpPost("logIn")]
+    public async Task<IResult<UserDto>> SignInAsync(LogInRequest request)
     {
-        var result = await authService.SignInAsync(email, password);
+        var result = await authService.SignInAsync(request.Email, request.Password);
 
         return result;
     }

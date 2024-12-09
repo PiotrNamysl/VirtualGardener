@@ -1,6 +1,9 @@
 namespace VirtualGardener.Client.Components.Pages;
 
-public class Home_razor
+public partial class HomePage : BaseAuthorizedPage
 {
-    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+    }
 }
