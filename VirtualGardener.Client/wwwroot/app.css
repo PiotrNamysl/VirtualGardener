@@ -78,3 +78,7 @@ button {
 button:hover {
     background-color: #66bb6a;
 }
+
+.app-color {
+    color: #388e3c;
+}

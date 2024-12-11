@@ -7,7 +7,7 @@ namespace VirtualGardener.Client.Components.Pages;
 public partial class LoginPage
 {
     [Inject] private IVirtualGardenerApiService _virtualGardenerApiService { get; set; }
-    [Inject] private ILocalStorageService _localStorageService { get; set; }
+    [Inject] private IVirtualGardenerLocalStorageService VirtualGardenerLocalStorageService { get; set; }
     [Inject] private NavigationManager _navigationManager { get; set; }
 
     private string _email = string.Empty;
@@ -23,7 +23,7 @@ public partial class LoginPage
             {
                 var user = result.Data;
 
-                await _localStorageService.SetUserAuthStateAsync(new UserAuthState
+                await VirtualGardenerLocalStorageService.SetUserAuthStateAsync(new UserAuthState
                 {
                     Email = user.Email,
                     Name = user.Name,

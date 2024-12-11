@@ -2,7 +2,7 @@ using VirtualGardener.Client.Models;
 
 namespace VirtualGardener.Client.Services;
 
-public class LocalStorageService(Blazored.LocalStorage.ILocalStorageService localStorageService) : ILocalStorageService
+public class VirtualGardenerLocalStorageService(Blazored.LocalStorage.ILocalStorageService localStorageService) : IVirtualGardenerLocalStorageService
 {
     private const string UserAuthStateKey = "UserAuthState";
 
@@ -11,4 +11,7 @@ public class LocalStorageService(Blazored.LocalStorage.ILocalStorageService loca
 
     public async Task SetUserAuthStateAsync(UserAuthState userAuthState)
         => await localStorageService.SetItemAsync(UserAuthStateKey, userAuthState);
+
+    public async Task ClearUserAuthState()
+        => await localStorageService.RemoveItemAsync(UserAuthStateKey);
 }

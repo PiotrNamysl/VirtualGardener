@@ -14,7 +14,6 @@ public partial class RegisterPage()
     [Inject] private NavigationManager _navigationManager { get; init; }
     [Inject] private DialogService _dialogService { get; init; }
 
-
     private User _newUser = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

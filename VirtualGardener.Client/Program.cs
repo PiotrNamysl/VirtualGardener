@@ -3,7 +3,6 @@ using Radzen;
 using VirtualGardener.Client.Components;
 using VirtualGardener.Client.Services;
 using VirtualGardenerServer.Models.ServerSettings;
-using ILocalStorageService = VirtualGardener.Client.Services.ILocalStorageService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +10,7 @@ builder.Services.Configure<ServerSettings>(builder.Configuration.GetSection("Ser
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddSingleton<IVirtualGardenerApiService, VirtualGardenerApiService>();
-builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
+builder.Services.AddScoped<IVirtualGardenerLocalStorageService, VirtualGardenerLocalStorageService>();
 builder.Services.AddRadzenComponents();
 builder.Services.AddBlazoredLocalStorage();
 

@@ -1,0 +1,20 @@
+@rendermode InteractiveServer
+
+<div class="nav-bar">
+    <div class="hrefs">
+        <a href="/">Home Page</a>
+        <a href="">My Plants</a>
+        <a href="">Placeholder</a>
+        <a href="">Placeholder</a>
+    </div>
+    <div class="account-tab" @onclick="ChangeAccountDetailsVisibility">@UserAuthState.Name[0]</div>
+
+    @if (_isAccountDetailsVisible)
+    {
+        <div class="account-details">
+            <p>Username: @UserAuthState.Name</p>
+            <p>Email: @UserAuthState.Email</p>
+            <button @onclick="SignOutAsync">Sign out</button>
+        </div>
+    }
+</div>
