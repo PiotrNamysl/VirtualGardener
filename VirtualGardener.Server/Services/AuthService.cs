@@ -46,6 +46,7 @@ public class AuthService(DataContext dataContext) : IAuthService
             return user.Password == GetHashedPassword(password)
                 ? Result<UserDto>.Success(new UserDto
                 {
+                    Id = user.Id,
                     Email = user.Email,
                     Name = user.Name,
                     Role = user.Role

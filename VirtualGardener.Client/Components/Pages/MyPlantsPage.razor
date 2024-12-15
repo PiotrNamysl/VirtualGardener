@@ -1,0 +1,19 @@
+@page "/MyPlants"
+
+@inherits BaseAuthorizedPage
+@rendermode InteractiveServer
+
+@if (IsAuthorized)
+{
+    <div class="body">
+        <NavBar UserAuthState="@UserAuthState"></NavBar>
+
+        <div class="toolbar">
+            <p></p>
+        </div>
+        @* <PlantCreator/> *@
+
+        <PlantsList PlantsSource="_myPlants"></PlantsList>
+
+    </div>
+}

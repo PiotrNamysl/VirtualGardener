@@ -15,7 +15,10 @@
         <input type="password" @bind="_password">
 
         <button type="submit" @onclick="LoginAsync">Log In</button>
-
+        <br>
+        <br>
+        <div hidden="@(!_isBusy)"  class="spinner-border" role="status"></div>
+        
         @if (!string.IsNullOrWhiteSpace(_errorMessage))
         {
             <p class="error-message">@_errorMessage</p>

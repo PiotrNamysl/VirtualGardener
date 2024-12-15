@@ -1,3 +1,5 @@
+using VirtualGardener.Client.Models.Enums;
+
 namespace VirtualGardener.Client.Models;
 
 public class User

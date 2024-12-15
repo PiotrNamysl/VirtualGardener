@@ -1,4 +1,4 @@
-namespace VirtualGardener.Client.Models;
+namespace VirtualGardener.Client.Models.Enums;
 
 public enum Role
 {

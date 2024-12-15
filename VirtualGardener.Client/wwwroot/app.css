@@ -15,7 +15,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 350px;
     text-align: center;
 
     h1 {
@@ -81,4 +81,12 @@ button:hover {
 
 .app-color {
     color: #388e3c;
+}
+
+.red-button {
+    background-color: #c6291f !important;
+}
+
+.red-button:hover {
+    background-color: #671410 !important;
 }

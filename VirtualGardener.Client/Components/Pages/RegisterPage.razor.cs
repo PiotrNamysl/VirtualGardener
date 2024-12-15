@@ -3,8 +3,8 @@ using Microsoft.Extensions.Options;
 using Radzen;
 using VirtualGardener.Client.Models;
 using VirtualGardener.Client.Services;
+using VirtualGardener.Client.Services.Abstraction;
 using VirtualGardener.Client.Utilities;
-using VirtualGardenerServer.Models.ServerSettings;
 
 namespace VirtualGardener.Client.Components.Pages;
 
@@ -15,6 +15,7 @@ public partial class RegisterPage()
     [Inject] private DialogService _dialogService { get; init; }
 
     private User _newUser = new();
+    private bool _isBusy = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -22,6 +23,7 @@ public partial class RegisterPage()
 
     private async Task Register()
     {
+        _isBusy = true;
         var result = await _virtualGardenerApiService.RegisterAsync(_newUser);
         if (result.IsFullSuccess)
         {
@@ -36,5 +38,7 @@ public partial class RegisterPage()
             else
                 await _dialogService.Alert("Please contact the administrator.", "Registration Failed");
         }
+
+        _isBusy = false;
     }
 }

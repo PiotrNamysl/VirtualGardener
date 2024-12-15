@@ -17,11 +17,11 @@
 
         <label>Confirm Password</label>
         <input type="password">
-        
         <br>
-        
         <button @onclick="Register">Register</button>
-
+        <br>
+        <br>
+        <div hidden="@(!_isBusy)" class="spinner-border" role="status"></div>
         <p>Already have an account? <a href="/">Login here</a></p>
     </div>
 </div>

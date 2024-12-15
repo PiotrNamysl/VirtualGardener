@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Components;
 using VirtualGardener.Client.Models;
 using VirtualGardener.Client.Services;
+using VirtualGardener.Client.Services.Abstraction;
 
-namespace VirtualGardener.Client.Components;
+namespace VirtualGardener.Client.Components.Other;
 
 public partial class NavBar : ComponentBase
 {

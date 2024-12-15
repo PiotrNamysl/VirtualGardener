@@ -1,6 +1,6 @@
 using VirtualGardener.Client.Models;
 
-namespace VirtualGardener.Client.Services;
+namespace VirtualGardener.Client.Services.Abstraction;
 
 public interface IVirtualGardenerLocalStorageService
 {

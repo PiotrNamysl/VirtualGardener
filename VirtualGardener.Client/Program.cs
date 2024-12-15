@@ -1,8 +1,9 @@
 using Blazored.LocalStorage;
 using Radzen;
 using VirtualGardener.Client.Components;
+using VirtualGardener.Client.Models.ServerSettings;
 using VirtualGardener.Client.Services;
-using VirtualGardenerServer.Models.ServerSettings;
+using VirtualGardener.Client.Services.Abstraction;
 
 var builder = WebApplication.CreateBuilder(args);
 

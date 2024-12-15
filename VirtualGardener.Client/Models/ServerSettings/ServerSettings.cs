@@ -1,4 +1,4 @@
-namespace VirtualGardenerServer.Models.ServerSettings;
+namespace VirtualGardener.Client.Models.ServerSettings;
 
 public class ServerSettings
 {
