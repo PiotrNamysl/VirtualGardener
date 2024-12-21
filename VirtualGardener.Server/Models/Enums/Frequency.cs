@@ -4,7 +4,7 @@ public enum Frequency
 {
     Daily,        
     EveryOtherDay,  
-    Weekly,     
-    BiWeekly,    
+    OnceAWeek,     
+    TwiceAWeek,    
     Monthly         
 }

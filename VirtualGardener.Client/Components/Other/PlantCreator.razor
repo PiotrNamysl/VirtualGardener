@@ -1,52 +1,52 @@
+@using VirtualGardener.Client.Models.Enums
 @rendermode InteractiveServer
 
-<div class="login-register-container">
-    <h1>Dodaj Roślinę</h1>
-    <p class="text">Wprowadź dane swojej rośliny poniżej.</p>
+<div class="popup-overlay">
+    <div class="popup">
+        <div class="popup-header">
+            <h2>Add Plant</h2>
+        </div>
+        <div class="popup-body">
+            <div class="error-message">@_errorMessage</div>
 
-    <div class="error-message">@ErrorMessage</div>
+            <label for="plantName">Plant Name:</label>
+            <input id="plantName" type="text" @bind="_plant.Name" placeholder="Enter plant name"/>
 
-    <label for="plantName">Nazwa rośliny:</label>
-    <input id="plantName" type="text" @bind="PlantName" placeholder="Wprowadź nazwę rośliny" />
+            <label for="plantType">Plant Type:</label>
+            <select id="plantType" @bind="_plant.Type">
+                @foreach (var type in Enum.GetValues<PlantType>())
+                {
+                    <option value="@type">@type</option>
+                }
+            </select>
 
-    <label for="plantType">Typ rośliny:</label>
-    <input id="plantType" type="text" @bind="PlantType" placeholder="Wprowadź typ rośliny (np. kwiat, drzewo)" />
+            <label for="wateringFrequency">Watering Frequency:</label>
+            <select id="wateringFrequency" @bind="_plant.WateringFrequency">
+                @foreach (var frequency in Enum.GetValues<Frequency>())
+                {
+                    <option value="@frequency">@frequency</option>
+                }
+            </select>
 
-    <label for="plantNotes">Notatki:</label>
-    <textarea id="plantNotes" @bind="PlantNotes" placeholder="Wprowadź notatki o roślinie"></textarea>
+            <label for="plantLocation">Location:</label>
+            <input id="plantLocation" type="text"
+                   @bind="_plant.Location"
+                   placeholder="Enter location"/>
 
-    <button @onclick="AddPlant">Dodaj Roślinę</button>
+            <label for="plantNotes">Notes:</label>
+            <textarea id="plantNotes"
+                      @bind="_plant.Notes"
+                      placeholder="Enter plant notes"></textarea>
+
+            <label for="isIndoor">Is Indoor:</label>
+
+            <input id="isIndoor"
+                   type="checkbox"
+                   @bind="_plant.IsIndoor"/>
+        </div>
+        <div class="popup-footer">
+            <button @onclick="AddPlantAsync">Save</button>
+            <button class="secondary">Cancel</button>
+        </div>
+    </div>
 </div>
-
-@code {
-    private string PlantName { get; set; }
-    private string PlantType { get; set; }
-    private string PlantNotes { get; set; }
-    private string ErrorMessage { get; set; }
-
-    private async Task AddPlant()
-    {
-        if (string.IsNullOrWhiteSpace(PlantName))
-        {
-            ErrorMessage = "Nazwa rośliny jest wymagana.";
-            return;
-        }
-
-        try
-        {
-            // Pseudo kod: Wywołanie serwisu lub API
-            // await PlantService.AddPlantAsync(new Plant { Name = PlantName, Type = PlantType, Notes = PlantNotes });
-
-            ErrorMessage = string.Empty;
-            PlantName = string.Empty;
-            PlantType = string.Empty;
-            PlantNotes = string.Empty;
-            Console.WriteLine("Roślina została dodana.");
-        }
-        catch (Exception ex)
-        {
-            ErrorMessage = "Wystąpił błąd podczas dodawania rośliny.";
-            Console.WriteLine(ex.Message);
-        }
-    }
-}

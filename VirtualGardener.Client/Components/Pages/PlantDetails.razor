@@ -1,0 +1,51 @@
+@page "/PlantDetails/{PlantId}"
+@inherits BaseAuthorizedPage
+
+<div class="body">
+    <NavBar UserAuthState="@UserAuthState"></NavBar>
+
+    <h1>Plant Details</h1>
+
+    <div>
+        <h2>Plant Information</h2>
+        <p><strong>Name:</strong> <span id="plant-name"></span></p>
+        <p><strong>Type:</strong> <span id="plant-type"></span></p>
+        <p><strong>Planting Date:</strong> <span id="planting-date"></span></p>
+        <p><strong>Watering Frequency:</strong> <span id="watering-frequency"></span></p>
+        <p><strong>Location:</strong> <span id="plant-location"></span></p>
+        <p><strong>Height:</strong> <span id="plant-height"></span> cm</p>
+        <p><strong>Notes:</strong> <span id="plant-notes"></span></p>
+        <p><strong>Is Indoor:</strong> <span id="plant-is-indoor"></span></p>
+        <p><strong>Last Watering:</strong> <span id="last-watering"></span></p>
+        <p><strong>Last Measuring:</strong> <span id="last-measuring"></span></p>
+        <p><strong>Last Fertilizing:</strong> <span id="last-fertilizing"></span></p>
+        <p><strong>Last Pruning:</strong> <span id="last-pruning"></span></p>
+        <p><strong>Last Pest Control:</strong> <span id="last-pest-control"></span></p>
+        <p><strong>Last Repotting:</strong> <span id="last-repotting"></span></p>
+    </div>
+
+    <div>
+        <h2>Care Tasks</h2>
+        <ul id="care-tasks">
+            <!-- Care tasks will be listed here dynamically -->
+        </ul>
+
+        <h3>Add New Care Task</h3>
+        <form action="/addCareTask" method="post">
+            <div>
+                <label for="taskName">Task Name:</label>
+                <input type="text" id="taskName" name="taskName" required>
+            </div>
+            <div>
+                <label for="taskDate">Date:</label>
+                <input type="date" id="taskDate" name="taskDate" required>
+            </div>
+            <div>
+                <label for="taskNotes">Notes:</label>
+                <textarea id="taskNotes" name="taskNotes"></textarea>
+            </div>
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+
+</div>

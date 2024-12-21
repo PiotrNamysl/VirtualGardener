@@ -84,79 +84,54 @@ public class VirtualGardenerApiService(IOptions<ServerSettings> serverSettings) 
     {
         using var client = new HttpClient();
 
-        // try
-        // {
-        //     var url = $"{_baseUrl}plants/{userId}";
-        //
-        //     var response = await client.GetAsync(url);
-        //     var responseBody = await response.Content.ReadAsStringAsync();
-        //     var parsedResponse = JsonConvert.DeserializeObject<Result<Plant>>(responseBody);
-        //
-        //     if (parsedResponse.IsFullSuccess())
-        //         return parsedResponse;
-        //
-        //     else if (parsedResponse.StatusCode == ResultStatusCode.DataAlreadyExist)
-        //         return Result<Plant>.Warning(ResultStatusCode.DataAlreadyExist);
-        //
-        //     return Result<Plant>.Warning(ResultStatusCode.UserCreationFailed);
-        // }
-        // catch (Exception ex)
-        // {
-        //     return Result<Plant>.Error(ResultStatusCode.Unknown);
-        // }
+        try
+        {
+            var url = $"{_baseUrl}plant/getPlants/{userId}";
+        
+            var response = await client.GetAsync(url);
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var parsedResponse = JsonConvert.DeserializeObject<Result<List<Plant>>>(responseBody);
+        
+            if (parsedResponse.IsFullSuccess())
+                return parsedResponse;
+        
+            else if (parsedResponse.StatusCode == ResultStatusCode.DataAlreadyExist)
+                return Result<List<Plant>>.Warning(ResultStatusCode.DataAlreadyExist);
+        
+            return Result<List<Plant>>.Warning(ResultStatusCode.UserCreationFailed);
+        }
+        catch (Exception ex)
+        {
+            return Result<List<Plant>>.Error(ResultStatusCode.Unknown);
+        }
+        
+    }
 
-        return Result<List<Plant>>.Success([
-            new Plant
-            {
-                Id = Guid.NewGuid(),
-                Name = "Rose",
-                Type = PlantType.Flower,
-                PlantingDate = new DateTime(2023, 5, 10),
-                Location = "Garden",
-                Height = 50,
-                Notes = "Thrives in sunlight, water twice a week.",
-                IsIndoor = false,
-                LastWatering = DateTime.Now.AddDays(-1),
-                LastMeasuring = DateTime.Now.AddDays(-7),
-                LastFertilizing = DateTime.Now.AddMonths(-1),
-                LastPruning = DateTime.Now.AddMonths(-3),
-                LastPestControl = DateTime.Now.AddMonths(-6),
-                LastRepotting = null
-            },
-            new Plant
-            {
-                Id = Guid.NewGuid(),
-                Name = "Ficus",
-                Type = PlantType.Tree,
-                PlantingDate = new DateTime(2021, 3, 15),
-                Location = "Living Room",
-                Height = 180, 
-                Notes = "Needs occasional misting, avoid overwatering.",
-                IsIndoor = true,
-                LastWatering = DateTime.Now.AddDays(-3),
-                LastMeasuring = DateTime.Now.AddMonths(-2),
-                LastFertilizing = DateTime.Now.AddMonths(-5),
-                LastPruning = null,
-                LastPestControl = null,
-                LastRepotting = DateTime.Now.AddMonths(-12)
-            },
-            new Plant
-            {
-                Id = Guid.NewGuid(),
-                Name = "Basil",
-                Type = PlantType.Herb,
-                PlantingDate = new DateTime(2024, 6, 1),
-                Location = "Kitchen",
-                Height = 25, 
-                Notes = "Harvest leaves regularly to encourage growth.",
-                IsIndoor = true,
-                LastWatering = DateTime.Now.AddDays(-2),
-                LastMeasuring = null,
-                LastFertilizing = DateTime.Now.AddMonths(-1),
-                LastPruning = DateTime.Now.AddMonths(-2),
-                LastPestControl = null,
-                LastRepotting = null
-            }
-        ]);
+    public async Task<IResult> AddPlantAsync(Guid userId, Plant plant)
+    {
+        using var client = new HttpClient();
+
+        try
+        {
+            var url = $"{_baseUrl}plant/add/{userId}";
+
+            var content = new StringContent(JsonConvert.SerializeObject(plant), Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(url, content);
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var parsedResponse = JsonConvert.DeserializeObject<IResult>(responseBody);
+
+            if (parsedResponse.IsFullSuccess())
+                return parsedResponse;
+
+            else if (parsedResponse.StatusCode == ResultStatusCode.DataAlreadyExist)
+                return Result<User>.Warning(ResultStatusCode.DataAlreadyExist);
+
+            return Result<User>.Warning(ResultStatusCode.UserCreationFailed);
+        }
+        catch (Exception ex)
+        {
+            return Result<User>.Error(ResultStatusCode.Unknown);
+        }
     }
 }

@@ -15,6 +15,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(serverSettings?.ConnectionString));
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IPlantService, PlantService>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

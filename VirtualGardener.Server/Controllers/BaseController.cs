@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using VirtualGardener.Client.Models;
+using VirtualGardenerServer.Utilities;
+using IResult = Microsoft.AspNetCore.Http.IResult;
 
 namespace VirtualGardenerServer.Controllers;
 
@@ -6,5 +9,5 @@ namespace VirtualGardenerServer.Controllers;
 [Route("api/[controller]")]
 public class BaseController : ControllerBase
 {
-   
+    
 }

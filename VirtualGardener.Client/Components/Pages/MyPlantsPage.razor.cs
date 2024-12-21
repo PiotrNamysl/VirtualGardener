@@ -8,7 +8,7 @@ public partial class MyPlantsPage : BaseAuthorizedPage
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        base.OnAfterRenderAsync(firstRender);
+        await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {
             var result = await VirtualGardenerApiService.GetMyPlantsAsync(UserAuthState.Id);
@@ -16,6 +16,8 @@ public partial class MyPlantsPage : BaseAuthorizedPage
             {
                 _myPlants.AddRange(result.Data);
             }
+            
+            await InvokeAsync(StateHasChanged);
         }
     }
 }

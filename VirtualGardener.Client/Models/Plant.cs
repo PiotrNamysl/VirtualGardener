@@ -5,14 +5,14 @@ namespace VirtualGardener.Client.Models;
 public class Plant
 {
     public Guid Id { get; init; }
-    public string Name { get; init; }
-    public PlantType Type { get; init; }
-    public DateTime PlantingDate { get; init; }
-    public Frequency WateringFrequency { get; init; }
+    public string? Name { get; set; }
+    public PlantType Type { get; set; }
+    public DateTime PlantingDate { get; set; }
+    public Frequency WateringFrequency { get; set; }
     public Frequency FertilizingFrequency => (Frequency)WateringFrequency + 1;
-    public string Location { get; set; }
+    public string? Location { get; set; }
     public double Height { get; set; }
-    public string Notes { get; set; }
+    public string? Notes { get; set; }
     public bool IsIndoor { get; set; }
 
     public DateTime? LastWatering { get; set; }
