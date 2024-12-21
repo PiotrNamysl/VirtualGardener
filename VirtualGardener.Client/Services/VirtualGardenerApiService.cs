@@ -119,19 +119,19 @@ public class VirtualGardenerApiService(IOptions<ServerSettings> serverSettings) 
 
             var response = await client.PostAsync(url, content);
             var responseBody = await response.Content.ReadAsStringAsync();
-            var parsedResponse = JsonConvert.DeserializeObject<IResult>(responseBody);
+            var parsedResponse = JsonConvert.DeserializeObject<Result>(responseBody);
 
             if (parsedResponse.IsFullSuccess())
                 return parsedResponse;
 
             else if (parsedResponse.StatusCode == ResultStatusCode.DataAlreadyExist)
-                return Result<User>.Warning(ResultStatusCode.DataAlreadyExist);
+                return Result.Warning(ResultStatusCode.DataAlreadyExist);
 
-            return Result<User>.Warning(ResultStatusCode.UserCreationFailed);
+            return Result.Warning(ResultStatusCode.UserCreationFailed);
         }
         catch (Exception ex)
         {
-            return Result<User>.Error(ResultStatusCode.Unknown);
+            return Result.Error(ResultStatusCode.Unknown);
         }
     }
 }

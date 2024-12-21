@@ -8,12 +8,12 @@ namespace VirtualGardenerServer.Controllers;
 
 public class PlantController(IPlantService plantService) : BaseController
 {
-    [HttpGet("GetPlants/{userId}")]
+    [HttpGet("getPlants/{userId}")]
     public async Task<IResult<List<Plant>>> GetPlantsAsync(Guid userId) => await plantService.GetPlantsAsync(userId);
 
-    [HttpGet("GetPlantDetails/{id}")]
+    [HttpGet("getPlantDetails/{id}")]
     public async Task<IResult<Plant>> GetPlantDetailsAsync(Guid userId, Guid plantId) => await plantService.GetPlantDetailsAsync(userId, plantId);
 
     [HttpPost("add/{userId}")]
-    public async Task<IResult> GetPlantDetailsAsync(Guid userId, [FromBody] AddPlantRequest plant) => await plantService.AddPlantAsync(userId, plant);
+    public async Task<IResult> AddPlantAsync(Guid userId, [FromBody] AddPlantRequest plant) => await plantService.AddPlantAsync(userId, plant);
 }

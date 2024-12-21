@@ -8,13 +8,16 @@
     <div class="body">
         <NavBar UserAuthState="@UserAuthState"></NavBar>
 
-        <div class="toolbar">
-            <p></p>
+        <div class="content">
+                <PlantCreator @ref="_plantCreator"
+                              UserAuthState="UserAuthState"
+                              RefreshPlants="RefreshPlants"/>
+            <div class="list">
+                <PlantsList PlantsSource="_myPlants"/>
+            </div>
+            <button class="new-plant-button" @onclick="async() =>await _plantCreator.ShowPopupAsync()">New
+                Plant
+            </button>
         </div>
-        
-        @* <PlantCreator UserAuthState="UserAuthState"/> *@
-
-        <PlantsList PlantsSource="_myPlants"></PlantsList>
-
     </div>
 }

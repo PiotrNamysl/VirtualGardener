@@ -28,6 +28,9 @@
 
 .grid-row span {
     background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .action-btn {
@@ -41,4 +44,9 @@
 
 .action-btn:hover {
     background-color: #66bb6a;
+}
+
+.actions{
+    display: flex;
+    flex-direction: row;
 }

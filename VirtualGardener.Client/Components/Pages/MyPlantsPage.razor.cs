@@ -1,3 +1,4 @@
+using VirtualGardener.Client.Components.Other;
 using VirtualGardener.Client.Models;
 
 namespace VirtualGardener.Client.Components.Pages;
@@ -5,19 +6,25 @@ namespace VirtualGardener.Client.Components.Pages;
 public partial class MyPlantsPage : BaseAuthorizedPage
 {
     private List<Plant> _myPlants = [];
+    private PlantCreator _plantCreator;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {
-            var result = await VirtualGardenerApiService.GetMyPlantsAsync(UserAuthState.Id);
-            if (result.IsFullSuccess())
-            {
-                _myPlants.AddRange(result.Data);
-            }
-            
+            await RefreshPlants();
             await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task RefreshPlants()
+    {
+        var result = await VirtualGardenerApiService.GetMyPlantsAsync(UserAuthState.Id);
+        if (result.IsFullSuccess())
+        {
+            _myPlants.Clear();
+            _myPlants.AddRange(result.Data);
         }
     }
 }
