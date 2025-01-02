@@ -5,14 +5,14 @@ using VirtualGardener.Client.Services.Abstraction;
 
 namespace VirtualGardener.Client.Components.Pages;
 
-public partial class BaseAuthorizedPage() : ComponentBase
+public class BaseAuthorizedPage : ComponentBase
 {
     [Inject] protected NavigationManager NavigationManager { get; init; }
     [Inject] protected IVirtualGardenerLocalStorageService VirtualGardenerLocalStorageService { get; init; }
     [Inject] protected IVirtualGardenerApiService VirtualGardenerApiService { get; init; }
     protected UserAuthState UserAuthState { get; set; } = new();
     protected string UserName => UserAuthState.Name;
-    protected bool IsAuthorized => UserAuthState.Name is not null;
+    protected bool IsAuthorized => UserName is not null;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

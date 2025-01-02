@@ -87,24 +87,49 @@ public class VirtualGardenerApiService(IOptions<ServerSettings> serverSettings) 
         try
         {
             var url = $"{_baseUrl}plant/getPlants/{userId}";
-        
+
             var response = await client.GetAsync(url);
             var responseBody = await response.Content.ReadAsStringAsync();
             var parsedResponse = JsonConvert.DeserializeObject<Result<List<Plant>>>(responseBody);
-        
+
             if (parsedResponse.IsFullSuccess())
                 return parsedResponse;
-        
+
             else if (parsedResponse.StatusCode == ResultStatusCode.DataAlreadyExist)
                 return Result<List<Plant>>.Warning(ResultStatusCode.DataAlreadyExist);
-        
+
             return Result<List<Plant>>.Warning(ResultStatusCode.UserCreationFailed);
         }
         catch (Exception ex)
         {
             return Result<List<Plant>>.Error(ResultStatusCode.Unknown);
         }
-        
+    }
+
+    public async Task<IResult<Plant>> GetPlantDetailsAsync(Guid userId, string plantId)
+    {
+        using var client = new HttpClient();
+
+        try
+        {
+            var url = $"{_baseUrl}plant/getPlantDetails/{plantId}/{userId}";
+
+            var response = await client.GetAsync(url);
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var parsedResponse = JsonConvert.DeserializeObject<Result<Plant>>(responseBody);
+
+            if (parsedResponse.IsFullSuccess())
+                return parsedResponse;
+
+            else if (parsedResponse.StatusCode == ResultStatusCode.DataAlreadyExist)
+                return Result<Plant>.Warning(ResultStatusCode.DataAlreadyExist);
+
+            return Result<Plant>.Warning(ResultStatusCode.UserCreationFailed);
+        }
+        catch (Exception ex)
+        {
+            return Result<Plant>.Error(ResultStatusCode.Unknown);
+        }
     }
 
     public async Task<IResult> AddPlantAsync(Guid userId, Plant plant)
@@ -132,6 +157,57 @@ public class VirtualGardenerApiService(IOptions<ServerSettings> serverSettings) 
         catch (Exception ex)
         {
             return Result.Error(ResultStatusCode.Unknown);
+        }
+    }
+
+    public async Task<IResult> AddCareTaskAsync(Guid userId, string plantId, CareTask careTask)
+    {
+        using var client = new HttpClient();
+
+        try
+        {
+            var url = $"{_baseUrl}plant/addCareTask/{plantId}/{userId}";
+
+            var content = new StringContent(JsonConvert.SerializeObject(careTask), Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync(url, content);
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var parsedResponse = JsonConvert.DeserializeObject<Result>(responseBody);
+
+            if (parsedResponse.IsFullSuccess())
+                return parsedResponse;
+
+            else if (parsedResponse.StatusCode == ResultStatusCode.DataAlreadyExist)
+                return Result.Warning(ResultStatusCode.DataAlreadyExist);
+
+            return Result.Warning(ResultStatusCode.UserCreationFailed);
+        }
+        catch (Exception ex)
+        {
+            return Result.Error(ResultStatusCode.Unknown);
+        }
+    }
+
+    public async Task<IResult> DeletePlantAsync(Guid userId, string plantId)
+    {
+        using var client = new HttpClient();
+
+        try
+        {
+            var url = $"{_baseUrl}plant/deletePlant/{plantId}/{userId}";
+
+            var response = await client.GetAsync(url);
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var parsedResponse = JsonConvert.DeserializeObject<Result>(responseBody);
+
+            if (parsedResponse.IsFullSuccess())
+                return parsedResponse;
+
+            return Result<Plant>.Warning(ResultStatusCode.UserCreationFailed);
+        }
+        catch (Exception ex)
+        {
+            return Result<Plant>.Error(ResultStatusCode.Unknown);
         }
     }
 }

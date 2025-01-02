@@ -26,7 +26,7 @@ else
                 <span>@plant.Height cm</span>
                 <span>@(plant.IsIndoor ? "Yes" : "No")</span>
                 <span class="actions">
-                    <button class="action-btn">Details</button>
+                    <button class="action-btn" @onclick="()=>GoToDetails(plant)">Details</button>
                     <button class="action-btn red-button">Delete</button>
                 </span>
             </div>

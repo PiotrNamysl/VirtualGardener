@@ -7,8 +7,8 @@ public class VirtualGardenerLocalStorageService(Blazored.LocalStorage.ILocalStor
 {
     private const string UserAuthStateKey = "UserAuthState";
 
-    public async Task<UserAuthState> GetUserAuthStateAsync()
-        => await localStorageService.GetItemAsync<UserAuthState>(UserAuthStateKey);
+    public async Task<UserAuthState?> GetUserAuthStateAsync()
+        => await localStorageService.GetItemAsync<UserAuthState?>(UserAuthStateKey);
 
     public async Task SetUserAuthStateAsync(UserAuthState userAuthState)
         => await localStorageService.SetItemAsync(UserAuthStateKey, userAuthState);

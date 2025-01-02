@@ -9,4 +9,6 @@ public interface IPlantService
     Task<IResult<List<Plant>>> GetPlantsAsync(Guid userId);
     Task<IResult<Plant>> GetPlantDetailsAsync(Guid userId, Guid plantId);
     Task<IResult> AddPlantAsync(Guid userId, AddPlantRequest plant);
+    Task<IResult> DeletePlantAsync(Guid userId, Guid plantId);
+    Task<IResult> AddCareTaskAsync(Guid userId, Guid plantId, CareTask careTask);
 }

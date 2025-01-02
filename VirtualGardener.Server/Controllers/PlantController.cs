@@ -11,9 +11,18 @@ public class PlantController(IPlantService plantService) : BaseController
     [HttpGet("getPlants/{userId}")]
     public async Task<IResult<List<Plant>>> GetPlantsAsync(Guid userId) => await plantService.GetPlantsAsync(userId);
 
-    [HttpGet("getPlantDetails/{id}")]
-    public async Task<IResult<Plant>> GetPlantDetailsAsync(Guid userId, Guid plantId) => await plantService.GetPlantDetailsAsync(userId, plantId);
+    [HttpGet("getPlantDetails/{plantId}/{userId}")]
+    public async Task<IResult<Plant>> GetPlantDetailsAsync(Guid userId, string plantId) =>
+        await plantService.GetPlantDetailsAsync(userId, Guid.Parse(plantId));
 
     [HttpPost("add/{userId}")]
     public async Task<IResult> AddPlantAsync(Guid userId, [FromBody] AddPlantRequest plant) => await plantService.AddPlantAsync(userId, plant);
+
+    [HttpPost("addCareTask/{plantId}/{userId}")]
+    public async Task<IResult> AddCareTaskAsync(Guid userId, string plantId, [FromBody] CareTask careTask) =>
+        await plantService.AddCareTaskAsync(userId, Guid.Parse(plantId), careTask);
+
+    [HttpDelete("deletePlant/{plantId}/{userId}")]
+    public async Task<IResult> DeletePlantAsync(Guid userId, string plantId) =>
+        await plantService.GetPlantDetailsAsync(userId, Guid.Parse(plantId));
 }

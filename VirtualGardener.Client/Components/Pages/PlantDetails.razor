@@ -1,51 +1,81 @@
 @page "/PlantDetails/{PlantId}"
+
+@rendermode InteractiveServer
+@using VirtualGardener.Client.Models.Enums
 @inherits BaseAuthorizedPage
 
-<div class="body">
-    <NavBar UserAuthState="@UserAuthState"></NavBar>
+@if (_plant is not null)
+{
+  <div class="body">
+    <div class="plant-details-container">
+        <h1 class="page-title app-color">Plant Details</h1>
 
-    <h1>Plant Details</h1>
+        <div class="content-wrapper">
+            <div class="login-register-container plant-info">
+                <h2 class="section-title">Plant Information</h2>
+                <p><strong>Name:</strong> @_plant.Name</p>
+                <p><strong>Type:</strong> @_plant.Type</p>
+                <p><strong>Planting Date:</strong> @_plant.PlantingDate.ToString("yyyy-MM-dd")</p>
+                <p><strong>Watering Frequency:</strong> @_plant.WateringFrequency</p>
+                <p><strong>Location:</strong> @_plant.Location</p>
+                <p><strong>Height:</strong> @_plant.Height cm</p>
+                <p><strong>Notes:</strong> @_plant.Notes</p>
+                <p><strong>Is Indoor:</strong> @(_plant.IsIndoor ? "Yes" : "No")</p>
+                <p><strong>Last Watering:</strong> @(_plant.LastWatering?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+                <p><strong>Last Pest Control:</strong> @(_plant.LastPestControl?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+                <p><strong>Last Measuring:</strong> @(_plant.LastMeasuring?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+                <p><strong>Last Pruning:</strong> @(_plant.LastPruning?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+                <p><strong>Last Repotting:</strong> @(_plant.LastRepotting?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+            </div>
 
-    <div>
-        <h2>Plant Information</h2>
-        <p><strong>Name:</strong> <span id="plant-name"></span></p>
-        <p><strong>Type:</strong> <span id="plant-type"></span></p>
-        <p><strong>Planting Date:</strong> <span id="planting-date"></span></p>
-        <p><strong>Watering Frequency:</strong> <span id="watering-frequency"></span></p>
-        <p><strong>Location:</strong> <span id="plant-location"></span></p>
-        <p><strong>Height:</strong> <span id="plant-height"></span> cm</p>
-        <p><strong>Notes:</strong> <span id="plant-notes"></span></p>
-        <p><strong>Is Indoor:</strong> <span id="plant-is-indoor"></span></p>
-        <p><strong>Last Watering:</strong> <span id="last-watering"></span></p>
-        <p><strong>Last Measuring:</strong> <span id="last-measuring"></span></p>
-        <p><strong>Last Fertilizing:</strong> <span id="last-fertilizing"></span></p>
-        <p><strong>Last Pruning:</strong> <span id="last-pruning"></span></p>
-        <p><strong>Last Pest Control:</strong> <span id="last-pest-control"></span></p>
-        <p><strong>Last Repotting:</strong> <span id="last-repotting"></span></p>
+            <div class="tasks-section">
+                <div class="login-register-container tasks-list">
+                    <h2 class="section-title">Care Tasks</h2>
+                    @if (_plant.CareTasks.Any())
+                    {
+                        <ul class="task-list">
+                            @foreach (var task in _plant.CareTasks)
+                            {
+                                <li class="task-item">
+                                    <strong>Task:</strong> @task.ActionType <br />
+                                    <strong>Date:</strong> @task.TaskDate.ToString("yyyy-MM-dd") <br />
+                                    <strong>Description:</strong> @task.Description <br />
+                                    <strong>Notes:</strong> @task.Notes
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>No tasks found.</p>
+                    }
+                </div>
+
+                <div class="login-register-container task-form">
+                    <h3 class="section-title">Add New Care Task</h3>
+                    <form>
+                        <div class="form-group">
+                            <label>Task Type:</label>
+                            <select class="form-control" @bind="_careTaskToAdd.ActionType">
+                                @foreach (var type in Enum.GetValues(typeof(CareTaskType)))
+                                {
+                                    <option>@type</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <input type="text" placeholder="Enter task description" @bind="_careTaskToAdd.Description"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Notes:</label>
+                            <textarea placeholder="Additional notes" @bind="_careTaskToAdd.Notes"></textarea>
+                        </div>
+                        <button type="submit" class="btn" @onclick="()=>AddCareTask()">Add Task</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <h2>Care Tasks</h2>
-        <ul id="care-tasks">
-            <!-- Care tasks will be listed here dynamically -->
-        </ul>
-
-        <h3>Add New Care Task</h3>
-        <form action="/addCareTask" method="post">
-            <div>
-                <label for="taskName">Task Name:</label>
-                <input type="text" id="taskName" name="taskName" required>
-            </div>
-            <div>
-                <label for="taskDate">Date:</label>
-                <input type="date" id="taskDate" name="taskDate" required>
-            </div>
-            <div>
-                <label for="taskNotes">Notes:</label>
-                <textarea id="taskNotes" name="taskNotes"></textarea>
-            </div>
-            <button type="submit">Add Task</button>
-        </form>
-    </div>
-
 </div>
+}

@@ -9,6 +9,8 @@ public interface IVirtualGardenerApiService
     Task<IResult> RegisterAsync(User user);
     Task<IResult<User>> LogInAsync(string email, string password);
     Task<IResult<List<Plant>>> GetMyPlantsAsync(Guid userId);
+    Task<IResult<Plant>> GetPlantDetailsAsync(Guid userId, string plantId);
     Task<IResult> AddPlantAsync(Guid userId, Plant plant);
-    // Task<IResult<Plant>> GetMyPlantHistory(Guid userId);
+    Task<IResult> AddCareTaskAsync(Guid userId, string plantId, CareTask careTask);
+    Task<IResult> DeletePlantAsync(Guid userId, string plantId);
 }

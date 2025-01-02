@@ -76,4 +76,50 @@ public class PlantService(DataContext dataContext) : IPlantService
             return Result<IResult>.Error(ResultStatusCode.InternalServerError);
         }
     }
+
+    public async Task<IResult> DeletePlantAsync(Guid userId, Guid plantId)
+    {
+        try
+        {
+            var plant = await dataContext.Plants
+                .Include(p => p.CareTasks)
+                .FirstOrDefaultAsync(p => p.Id == plantId);
+
+            if (plant is not null)
+            {
+                dataContext.Plants.Remove(plant);
+                return Result<Plant>.Success(plant);
+            }
+
+            return Result<Plant>.Warning(ResultStatusCode.NoDataFound);
+        }
+        catch (Exception ex)
+        {
+            return Result<Plant>.Error(ResultStatusCode.InternalServerError);
+        }
+    }
+
+    public async Task<IResult> AddCareTaskAsync(Guid userId, Guid plantId, CareTask careTask)
+    {
+        try
+        {
+            var plant = await dataContext.Plants
+                .Include(p => p.CareTasks)
+                .FirstOrDefaultAsync(p => p.Id == plantId);
+
+            if (plant is not null)
+            {
+                plant.CareTasks.Add(careTask);
+                await dataContext.SaveChangesAsync();
+
+                return Result<Plant>.Success(ResultStatusCode.Ok);
+            }
+
+            return Result<Plant>.Warning(ResultStatusCode.NoDataFound);
+        }
+        catch (Exception ex)
+        {
+            return Result<Plant>.Error(ResultStatusCode.InternalServerError);
+        }
+    }
 }

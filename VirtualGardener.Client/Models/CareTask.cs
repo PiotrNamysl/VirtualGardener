@@ -1,13 +1,14 @@
+using System.ComponentModel.DataAnnotations;
 using VirtualGardener.Client.Models.Enums;
 
 namespace VirtualGardener.Client.Models;
 
 public class CareTask
 {
-    public Guid Id { get; init; }
-    public Guid PlantId { get; init; }
-    public CareTaskType ActionType { get; init; }
-    public string Description { get; init; }
-    public DateTime TaskDate { get; init; }
-    public string Notes { get; init; }
+    public Guid Id { get; set; }
+    public Guid PlantId { get; set; }
+    public CareTaskType ActionType { get; set; }
+    public string Description { get; set; }
+    public DateTime TaskDate { get; set; }
+    public string Notes { get; set; }
 }
