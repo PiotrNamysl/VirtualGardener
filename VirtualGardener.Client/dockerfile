@@ -1,11 +1,19 @@
-# Dockerfile dla Blazora (bez Nginx)
+# Etap budowania aplikacji
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
-COPY . ./
+WORKDIR /src
+
+# Kopiowanie plików Shared i Client
+COPY ../VirtualGardener.Shared/ ./VirtualGardener.Shared/
+COPY ./ ./VirtualGardener.Client/
+
+# Przywracanie zależności i publikacja projektu klienta
+WORKDIR /src/VirtualGardener.Client
+RUN dotnet restore
 RUN dotnet publish -c Release -o /app/publish
 
+# Etap tworzenia obrazu runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY --from=build /app/publish ./
 EXPOSE 80
-ENTRYPOINT ["dotnet", "VirtualGardener.Client.dll"] # Zmień nazwę DLL na właściwą dla klienta
+ENTRYPOINT ["dotnet", "VirtualGardener.Client.dll"]
