@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using VirtualGardener.Client.Models;
-using VirtualGardener.Client.Models.Enums;
-using VirtualGardener.Client.Services;
 using VirtualGardener.Client.Services.Abstraction;
+using VirtualGardener.Shared.Models;
 
 namespace VirtualGardener.Client.Components.Other;
 

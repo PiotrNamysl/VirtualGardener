@@ -1,5 +1,6 @@
 using VirtualGardener.Client.Components.Other;
 using VirtualGardener.Client.Models;
+using VirtualGardener.Shared.Models;
 
 namespace VirtualGardener.Client.Components.Pages;
 

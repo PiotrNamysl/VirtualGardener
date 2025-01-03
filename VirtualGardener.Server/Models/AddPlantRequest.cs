@@ -1,8 +1,6 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using VirtualGardenerServer.Models;
-using VirtualGardenerServer.Models.Enums;
+using VirtualGardener.Shared.Models.Enums;
 
-namespace VirtualGardener.Client.Models;
+namespace VirtualGardenerServer.Models;
 
 public class AddPlantRequest
 {

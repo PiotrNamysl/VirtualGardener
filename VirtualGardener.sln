@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualGardener.Server", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualGardener.Client", "VirtualGardener.Client\VirtualGardener.Client.csproj", "{0C5E3632-F7D4-49D1-A6CF-1454A4A87532}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualGardener.Shared", "VirtualGardener.Shared\VirtualGardener.Shared.csproj", "{11D39D5C-F6C8-4B7A-865D-29B13C5B1A42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,10 @@ Global
 		{0C5E3632-F7D4-49D1-A6CF-1454A4A87532}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C5E3632-F7D4-49D1-A6CF-1454A4A87532}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C5E3632-F7D4-49D1-A6CF-1454A4A87532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11D39D5C-F6C8-4B7A-865D-29B13C5B1A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11D39D5C-F6C8-4B7A-865D-29B13C5B1A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11D39D5C-F6C8-4B7A-865D-29B13C5B1A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11D39D5C-F6C8-4B7A-865D-29B13C5B1A42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

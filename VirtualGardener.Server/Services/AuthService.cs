@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using VirtualGardener.Shared.Models.Enums;
 using VirtualGardenerServer.Database;
 using VirtualGardenerServer.Models;
 using VirtualGardenerServer.Services.Abstraction;

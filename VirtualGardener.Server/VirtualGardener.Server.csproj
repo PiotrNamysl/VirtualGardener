@@ -22,4 +22,8 @@
       <Folder Include="Migrations\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\VirtualGardener.Shared\VirtualGardener.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

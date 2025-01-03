@@ -1,4 +1,5 @@
-using VirtualGardener.Client.Models;
+using VirtualGardener.Shared.Models;
+using VirtualGardenerServer.Models;
 using VirtualGardenerServer.Utilities;
 using IResult = VirtualGardenerServer.Utilities.IResult;
 

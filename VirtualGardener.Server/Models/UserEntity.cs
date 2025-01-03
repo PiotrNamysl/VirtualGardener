@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using VirtualGardener.Client.Models;
+using VirtualGardener.Shared.Models;
+using VirtualGardener.Shared.Models.Enums;
 
 namespace VirtualGardenerServer.Models;
 

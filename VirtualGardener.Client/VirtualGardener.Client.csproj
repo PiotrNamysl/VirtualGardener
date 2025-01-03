@@ -17,4 +17,8 @@
       <PackageReference Include="Radzen.Blazor" Version="5.6.12" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\VirtualGardener.Shared\VirtualGardener.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

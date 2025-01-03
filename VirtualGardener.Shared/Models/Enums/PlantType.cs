@@ -1,4 +1,4 @@
-namespace VirtualGardener.Client.Models;
+namespace VirtualGardener.Shared.Models.Enums;
 
 public enum PlantType
 {

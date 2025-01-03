@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using VirtualGardener.Client.Models;
 using VirtualGardener.Client.Utilities;
+using VirtualGardener.Shared.Models;
 
 namespace VirtualGardener.Client.Components.Pages;
 

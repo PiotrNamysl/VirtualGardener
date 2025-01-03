@@ -1,4 +1,4 @@
-namespace VirtualGardener.Client.Models.Requests;
+namespace VirtualGardener.Shared.Models.Requests;
 
 public class LogInRequest
 {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using VirtualGardener.Client.Models;
+using VirtualGardener.Shared.Models;
 
 namespace VirtualGardener.Client.Components.Other;
 

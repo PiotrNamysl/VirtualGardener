@@ -1,4 +1,4 @@
-using VirtualGardener.Client.Models.Enums;
+using VirtualGardener.Shared.Models.Enums;
 
 namespace VirtualGardener.Client.Models;
 

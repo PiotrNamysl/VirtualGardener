@@ -1,4 +1,4 @@
-namespace VirtualGardener.Client.Models.Enums;
+namespace VirtualGardener.Shared.Models.Enums;
 
 public enum CareTaskType
 {

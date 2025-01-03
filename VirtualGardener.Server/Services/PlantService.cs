@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using VirtualGardener.Client.Models;
+using VirtualGardener.Shared.Models;
 using VirtualGardenerServer.Database;
+using VirtualGardenerServer.Models;
+using VirtualGardenerServer.Services.Abstraction;
 using VirtualGardenerServer.Utilities;
 using IResult = VirtualGardenerServer.Utilities.IResult;
 
-namespace VirtualGardenerServer.Services.Abstraction;
+namespace VirtualGardenerServer.Services;
 
 public class PlantService(DataContext dataContext) : IPlantService
 {
@@ -12,9 +14,13 @@ public class PlantService(DataContext dataContext) : IPlantService
     {
         try
         {
-            var plants = await dataContext.Plants.Where(p => p.User.Id == userId).Select(p => p).ToListAsync();
+            var plants = await dataContext.Plants
+                .Include(p => p.CareTasks)
+                .Where(p => p.User.Id == userId)
+                .Select(p => p.ToPlant())
+                .ToListAsync();
 
-            if (plants.Any())
+            if (plants.Count != 0)
                 return Result<List<Plant>>.Success(plants);
 
             return Result<List<Plant>>.Success(ResultStatusCode.NoDataFound);
@@ -51,9 +57,8 @@ public class PlantService(DataContext dataContext) : IPlantService
             var user = await dataContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user is not null)
             {
-                var plantEntity = new Plant
+                var plantEntity = new PlantEntity
                 {
-                    User = user,
                     Name = plant.Name,
                     Type = plant.Type,
                     PlantingDate = DateTime.UtcNow,
@@ -61,6 +66,7 @@ public class PlantService(DataContext dataContext) : IPlantService
                     Location = plant.Location,
                     Notes = plant.Notes,
                     IsIndoor = plant.IsIndoor,
+                    User = user,
                 };
 
                 await dataContext.Plants.AddAsync(plantEntity);

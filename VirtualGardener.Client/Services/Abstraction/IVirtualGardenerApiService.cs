@@ -1,5 +1,6 @@
 using VirtualGardener.Client.Models;
 using VirtualGardener.Client.Utilities;
+using VirtualGardener.Shared.Models;
 using IResult = VirtualGardener.Client.Utilities.IResult;
 
 namespace VirtualGardener.Client.Services.Abstraction;

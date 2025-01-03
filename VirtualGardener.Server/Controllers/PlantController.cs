@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using VirtualGardener.Client.Models;
+using VirtualGardener.Shared.Models;
+using VirtualGardenerServer.Models;
 using VirtualGardenerServer.Services.Abstraction;
 using VirtualGardenerServer.Utilities;
 using IResult = VirtualGardenerServer.Utilities.IResult;

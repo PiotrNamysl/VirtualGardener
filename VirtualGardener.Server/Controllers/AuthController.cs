@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using VirtualGardener.Client.Models.Requests;
+using VirtualGardener.Shared.Models.Requests;
 using VirtualGardenerServer.Models;
 using VirtualGardenerServer.Services.Abstraction;
 using VirtualGardenerServer.Utilities;
